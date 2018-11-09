@@ -9,9 +9,9 @@
 
 using namespace std;
 
-char vowels[8] = {'A','B','C','D','E','F'};
+char vowels[5] = {'A','E','I','O','U'};
 
-int length_lcs(string& s1, string& s2) {
+void lcs(string& s1, string& s2) {
 	clock_t begin = clock();
 
 	int length_s1 = s1.size(); 
@@ -47,16 +47,32 @@ int length_lcs(string& s1, string& s2) {
 	cout << endl << "Time spent: " << elapsed_secs << endl;
 	cout << "S1: " << s1 << endl;
 	cout << "S2: " << s2 << endl;
-	return matrix[length_s1][length_s2];
+	cout << "Length: " << matrix[length_s1][length_s2] << endl << endl;
+}
+
+string getRandomString() {
+	string str;
+	for(int i = 0; i < 10; i++) {
+		int random = (rand() % (5 + 1));
+		str += vowels[random];
+	}
+	return str;
 }
 
 int main(int argc, char **argv) {
+	string s1 = "GAC";
+	string s2 = "AGCAT";
 
-	string s1("GAC");
-	string s2("AGCAT");
+	cout << "\n\n***** SIMPLE EXAMPLE *****" << endl;
+	lcs(s1, s2);
+
+	cout << "\n\n***** RANDOM SEQUENCES *****" << endl;
 	
-	int lcs = length_lcs(s1, s2);
-	cout << "Length: " << lcs << endl << endl << endl;
-
+	for(int i = 0; i < 5; ++i) {
+		s1 = getRandomString();
+		s2 = getRandomString();	
+		lcs(s1, s2);
+	}
+	
 	return 0;
 }
